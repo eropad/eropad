@@ -1,0 +1,43 @@
+{
+  "name": "eropad",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r dotenv/config dist/index.js",
+    "dev": "nodemon -x 'node -r dotenv/config -r ./register-ts-node.js' src/index.ts",
+    "prepare": "husky install",
+    "lint": "xo --fix",
+    "prepack": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eropad/eropad.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/eropad/eropad/issues"
+  },
+  "homepage": "https://github.com/eropad/eropad#readme",
+  "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "@tsconfig/recommended": "^1.0.1",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "xo": "^0.53.1"
+  },
+  "dependencies": {
+    "axios": "^1.3.2",
+    "dotenv": "^16.0.3",
+    "gpt-3-encoder": "^1.1.4",
+    "openai": "^3.1.0"
+  }
+}
