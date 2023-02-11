@@ -6,7 +6,7 @@ class Gpt3ApI {
 	#openai;
 
 	#prompts = [
-		['long, explicit and highly detailed', 'Pleasure Unleashed: A Tale of Desire and Fulfillment'],
+		['Lesbian', 'The Featured Image For A Love Story About A Passionate, Beautiful And Young Lesbian Couple.'],
 	];
 
 	constructor(openAiSecret: string) {
@@ -50,9 +50,9 @@ class Gpt3ApI {
 
 	async generateBlog() {
 		const [prompt, imgPrompt] = getRandom(this.#prompts);
-		const imgData = await this.#generateThumbnail(`Generate the featured image for a story titled "${imgPrompt}".`);
-		const body = await this.#generateText(`Write a ${prompt} erotica.`);
-		const titleRaw = await this.#generateText(`Give a title to this ${prompt} erotica:\n\n\n${body}`);
+		const imgData = await this.#generateThumbnail(imgPrompt);
+		const body = await this.#generateText(`Write a long, explicit and highly detailed ${prompt} erotica.`);
+		const titleRaw = await this.#generateText(`Give a title to this erotica:\n\n\n${body}`);
 		const titleRawSplit = titleRaw.split('"');
 
 		if (titleRawSplit.length !== 3) {
