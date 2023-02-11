@@ -5,8 +5,10 @@ import getRandom from './get-random.js';
 class Gpt3ApI {
 	#openai;
 
-	#prompts = [
-		['Lesbian', 'The Featured Image For A Love Story About A Passionate, Beautiful And Young Lesbian Couple.'],
+	#tags = [
+		'Lesbian',
+		'Straight',
+		'Gay',
 	];
 
 	constructor(openAiSecret: string) {
@@ -20,6 +22,12 @@ class Gpt3ApI {
 	#textToHtml(text: string) {
 		return `<html><head></head><body><p>${text.replace(/\n/g, '<br> ')}</p></body></html>`;
 	}
+
+	#generatePrompt = () => {
+		const tag = getRandom(this.#tags);
+
+		return [tag, `The Featured Image For A Love Story About A Passionate, Beautiful And Young ${tag} Couple.`];
+	};
 
 	async #generateText(input: string) {
 		const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
@@ -49,7 +57,7 @@ class Gpt3ApI {
 	}
 
 	async generateBlog() {
-		const [prompt, imgPrompt] = getRandom(this.#prompts);
+		const [prompt, imgPrompt] = this.#generatePrompt();
 		const imgData = await this.#generateThumbnail(imgPrompt);
 		const body = await this.#generateText(`Write a long, explicit and highly detailed ${prompt} erotica.`);
 		const titleRaw = await this.#generateText(`Give a title to this erotica:\n\n\n${body}`);
