@@ -9,6 +9,7 @@ class Gpt3ApI {
 		'Lesbian',
 		'Straight',
 		'Gay',
+		'Toxic',
 	];
 
 	constructor(openAiSecret: string) {
