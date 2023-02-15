@@ -7,9 +7,10 @@ class Gpt3ApI {
 
 	#tags = [
 		'Lesbian',
-		'Straight',
 		'Gay',
 		'Toxic',
+		'Romantic',
+		'Destructive',
 	];
 
 	constructor(openAiSecret: string) {
