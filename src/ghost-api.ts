@@ -11,9 +11,6 @@ class GhostApi {
 	#twitter = 'anne_haenel';
 	#facebook = 'anne_haenel';
 
-	// // Site description
-	// #description = 'Discover the hottest stories ranging from steamy romance to hardcore action. Love, Lust & Passion has something for every one of your fantasies.';
-
 	#paths = {
 		authSetup: '/authentication/setup',
 		session: '/session',
