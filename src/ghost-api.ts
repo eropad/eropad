@@ -102,12 +102,11 @@ class GhostApi {
 		const image = await this.#upload(imgData);
 		const html = this.#textToHtml(text);
 
-		const {data} = await this.#axios.post<{excerpt: string;og_description: string; twitter_description: string;meta_description: string; id: string}>(`${this.#paths.publish}?source=html`, {
+		const {data: {posts: {0: post}}} = await this.#axios.post<{posts: [{status: string; excerpt: string; og_description: string; twitter_description: string; meta_description: string; id: string}]}>(`${this.#paths.publish}?source=html`, {
 			posts: [
 				{
 					title,
 					html,
-					status: 'published',
 					// eslint-disable-next-line @typescript-eslint/naming-convention
 					feature_image: image,
 					tags,
@@ -134,13 +133,12 @@ class GhostApi {
 			],
 		});
 
-		data.og_description = data.excerpt;
-		data.meta_description = data.excerpt;
-		data.twitter_description = data.excerpt;
+		post.og_description = post.excerpt;
+		post.meta_description = post.excerpt;
+		post.twitter_description = post.excerpt;
+		post.status = 'published';
 
-		const a = await this.#axios.put(`${this.#paths.publish}/${data.id}`, data);
-
-		console.log(a.data);
+		await this.#axios.put(`${this.#paths.publish}/${post.id}`, {posts: [post]});
 	}
 }
 
