@@ -15,7 +15,7 @@ class GhostApi {
 		authSetup: '/authentication/setup',
 		session: '/session',
 		adminUser: '/users/1',
-		htmlPublish: '/posts?source=html',
+		publish: '/posts',
 		imageUpload: '/images/upload',
 	};
 
@@ -102,7 +102,7 @@ class GhostApi {
 		const image = await this.#upload(imgData);
 		const html = this.#textToHtml(text);
 
-		const {data} = await this.#axios.post<{excerpt: string; id: string}>(this.#paths.htmlPublish, {
+		const {data} = await this.#axios.post<{excerpt: string;og_description: string; twitter_description: string;meta_description: string; id: string}>(`${this.#paths.publish}?source=html`, {
 			posts: [
 				{
 					title,
@@ -134,7 +134,13 @@ class GhostApi {
 			],
 		});
 
-		console.log(data);
+		data.og_description = data.excerpt;
+		data.meta_description = data.excerpt;
+		data.twitter_description = data.excerpt;
+
+		const a = await this.#axios.put(`${this.#paths.publish}/${data.id}`, data);
+
+		console.log(a.data);
 	}
 }
 
