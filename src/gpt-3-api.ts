@@ -84,7 +84,7 @@ class Gpt3ApI {
 			throw new Error('Error generated empty title');
 		}
 
-		return [title, this.#textToHtml(body), imgData];
+		return [title, this.#textToHtml(body), imgData, [category, adjective]] as [string, string, string, [string, string]];
 	}
 }
 

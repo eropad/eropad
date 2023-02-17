@@ -94,7 +94,7 @@ class GhostApi {
 		});
 	}
 
-	async publish(title: string, html: string, imgData: string) {
+	async publish(title: string, html: string, imgData: string, tags: [string, string]) {
 		const image = await this.#upload(imgData);
 
 		await this.#axios.post(this.#paths.htmlPublish, {
@@ -105,6 +105,14 @@ class GhostApi {
 					status: 'published',
 					// eslint-disable-next-line @typescript-eslint/naming-convention
 					feature_image: image,
+					tags,
+					featured: true,
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					primary_tag: tags[0],
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					og_image: image,
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					og_title: title,
 				},
 			],
 		});

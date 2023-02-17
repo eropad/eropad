@@ -8,9 +8,9 @@ const main = async () => {
 	await gh.init();
 
 	const gpt3 = new Gpt3ApI(openAiSecret);
-	const [title, blog, imgData] = await gpt3.generateBlog();
+	const [title, blog, imgData, tags] = await gpt3.generateBlog();
 
-	await gh.publish(title, blog, imgData);
+	await gh.publish(title, blog, imgData, tags);
 };
 
 // eslint-disable-next-line unicorn/prefer-top-level-await
