@@ -23,7 +23,7 @@ class Gpt3ApI {
 	#categories = [
 		'Gay',
 		'Lesbian',
-		'Straight',
+		'Hetrosexual',
 	];
 
 	constructor(openAiSecret: string) {
