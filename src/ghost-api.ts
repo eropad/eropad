@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 class GhostApi {
-	#bio = 'Anne, 23, is captivating the world of erotic fiction with her imaginative, steamy tales. She\'s quickly becoming a must-read with each story she weaves, taking you on a sensual journey like no other...';
+	#bio = 'Anne, 23, is captivating the world of erotic fiction with her imaginative, steamy tales. She\'s quickly becoming a must-read with each story she weaves, taking you on a sensual journey like no other.';
 	#name = 'Anne Haenel';
 	#blogTitle = 'Love, Lust & Passion';
 	#email = 'anne.haenel.llp@gmail.com';
@@ -31,6 +31,10 @@ class GhostApi {
 			// eslint-disable-next-line @typescript-eslint/naming-convention
 			baseURL: `${this.#website}/ghost/api/admin`,
 		});
+	}
+
+	#textToHtml(text: string) {
+		return `<html><head></head><body><p>${text.replace(/\n/g, '<br> ')}</p></body></html>`;
 	}
 
 	async #upload(b64: string) {
@@ -94,10 +98,11 @@ class GhostApi {
 		});
 	}
 
-	async publish(title: string, html: string, imgData: string, tags: [string, string]) {
+	async publish(title: string, text: string, imgData: string, tags: [string, string]) {
 		const image = await this.#upload(imgData);
+		const html = this.#textToHtml(text);
 
-		await this.#axios.post(this.#paths.htmlPublish, {
+		const {data} = await this.#axios.post<{excerpt: string; id: string}>(this.#paths.htmlPublish, {
 			posts: [
 				{
 					title,
@@ -113,9 +118,23 @@ class GhostApi {
 					og_image: image,
 					// eslint-disable-next-line @typescript-eslint/naming-convention
 					og_title: title,
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					twitter_image: image,
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					twitter_title: title,
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					meta_title: title,
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					email_subject: title,
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					feature_image_alt: title,
+					// eslint-disable-next-line @typescript-eslint/naming-convention
+					feature_image_caption: title,
 				},
 			],
 		});
+
+		console.log(data);
 	}
 }
 

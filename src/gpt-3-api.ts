@@ -12,17 +12,17 @@ class Gpt3ApI {
 		'Wicked',
 		'Adventurous',
 		'Spontaneous',
+		'Impulsive',
 		'Dirty',
 		'Filthy',
 		'Debasing',
 		'Toxic',
 		'Passionate',
-		'Vanilla',
 	];
 
 	#categories = [
-		'Lesbian',
 		'Gay',
+		'Lesbian',
 		'Straight',
 	];
 
@@ -32,10 +32,6 @@ class Gpt3ApI {
 		});
 
 		this.#openai = new OpenAIApi(configuration);
-	}
-
-	#textToHtml(text: string) {
-		return `<html><head></head><body><p>${text.replace(/\n/g, '<br> ')}</p></body></html>`;
 	}
 
 	async #generateText(input: string) {
@@ -70,8 +66,8 @@ class Gpt3ApI {
 		const adjective = getRandom(this.#adjectives);
 		const suffix = `About A Beautiful, Young And ${adjective} ${category} Couple.`;
 		const imgData = await this.#generateThumbnail(`The Featured Image For A Love Story ${suffix}`);
-		const body = await this.#generateText(`Write A Long, Explicit And Highly-detailed Erotica ${suffix}`);
-		const titleRaw = await this.#generateText(`Give a title to this erotica:\n\n\n${body}`);
+		const body = await this.#generateText(`Write A Long, Explicit, Engaging And Highly Detailed Erotica ${suffix}`);
+		const titleRaw = await this.#generateText(`Suggest A Title For The Following:\n\n\n${body}`);
 		const titleRawSplit = titleRaw.split('"');
 
 		if (titleRawSplit.length !== 3) {
@@ -84,7 +80,7 @@ class Gpt3ApI {
 			throw new Error('Error generated empty title');
 		}
 
-		return [title, this.#textToHtml(body), imgData, [category, adjective]] as [string, string, string, [string, string]];
+		return [title, body, imgData, [category, adjective]] as [string, string, string, [string, string]];
 	}
 }
 
