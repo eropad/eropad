@@ -5,12 +5,25 @@ import getRandom from './get-random.js';
 class Gpt3ApI {
 	#openai;
 
-	#tags = [
+	#adjectives = [
+		'Destructive',
+		'Romantic',
+		'Experimental',
+		'Wicked',
+		'Adventurous',
+		'Spontaneous',
+		'Dirty',
+		'Filthy',
+		'Debasing',
+		'Toxic',
+		'Passionate',
+		'Vanilla',
+	];
+
+	#categories = [
 		'Lesbian',
 		'Gay',
-		'Toxic',
-		'Romantic',
-		'Destructive',
+		'Straight',
 	];
 
 	constructor(openAiSecret: string) {
@@ -24,12 +37,6 @@ class Gpt3ApI {
 	#textToHtml(text: string) {
 		return `<html><head></head><body><p>${text.replace(/\n/g, '<br> ')}</p></body></html>`;
 	}
-
-	#generatePrompt = () => {
-		const tag = getRandom(this.#tags);
-
-		return [tag, `The Featured Image For A Love Story About A Passionate, Beautiful And Young ${tag} Couple.`];
-	};
 
 	async #generateText(input: string) {
 		const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
@@ -59,9 +66,11 @@ class Gpt3ApI {
 	}
 
 	async generateBlog() {
-		const [prompt, imgPrompt] = this.#generatePrompt();
-		const imgData = await this.#generateThumbnail(imgPrompt);
-		const body = await this.#generateText(`Write a long, explicit and highly detailed ${prompt} erotica.`);
+		const category = getRandom(this.#categories);
+		const adjective = getRandom(this.#adjectives);
+		const suffix = `About A Beautiful, Young And ${adjective} ${category} Couple.`;
+		const imgData = await this.#generateThumbnail(`The Featured Image For A Love Story ${suffix}`);
+		const body = await this.#generateText(`Write A Long, Explicit And Highly-detailed Erotica ${suffix}`);
 		const titleRaw = await this.#generateText(`Give a title to this erotica:\n\n\n${body}`);
 		const titleRawSplit = titleRaw.split('"');
 
