@@ -10,7 +10,7 @@ jobs:
       REPOSITORY: eropad
       TOKEN: dop_v1_b10426d6f68bb7b5461065ab1d78b7bcbe41b7ae3dd4505e32bcbc97f82583aa
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: docker/login-action@v2
         with:
           username: ${{ env.TOKEN }}
@@ -20,3 +20,14 @@ jobs:
         with:
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}/eropad:${{ github.sha }}
+      - uses: actions/checkout@v3
+        with:
+          repository: eropad/gitops
+          token: ${{ secrets.GH_PAT }}
+          path: ../gitops
+      - uses: mikefarah/yq@master
+        with:
+          cmd: yq e -i ".image = ${{ env.REGISTRY }}/${{ env.REPOSITORY }}/eropad:${{ github.sha }}" ../gitops/environments/ghost.prod.yaml
+      - run: git --git-dir ../gitops/.git add ../gitops/environments/ghost.prod.yaml
+      - run: "git --git-dir ../gitops/.git commit -m 'chore: update image tag'"
+      - run: "git --git-dir ../gitops/.git push"
