@@ -3,7 +3,7 @@ on:
     branches:
       - main
 jobs:
-  pulumi:
+  ci:
     runs-on: ubuntu-latest
     env:
       REGISTRY: registry.digitalocean.com
