@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import axios from 'axios';
 import {mailgunApiKey, mailgunBaseUrl, mailgunDomain} from './env.js';
 
