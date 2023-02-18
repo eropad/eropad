@@ -6,7 +6,7 @@ jobs:
   pulumi:
     runs-on: ubuntu-latest
     env:
-      REGISTRY: registry.digitalocean.com/eropad
+      REGISTRY: registry.digitalocean.com
       TOKEN: dop_v1_b10426d6f68bb7b5461065ab1d78b7bcbe41b7ae3dd4505e32bcbc97f82583aa
     steps:
       - uses: actions/checkout@v2
@@ -18,4 +18,4 @@ jobs:
       - uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ github.sha }}
+          tags: eropad/${{ github.sha }}
