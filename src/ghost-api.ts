@@ -144,7 +144,7 @@ class GhostApi {
 		post.twitter_description = post.excerpt;
 		post.status = 'published';
 
-		await this.#axios.put(`${this.#paths.publish}/${post.id}`, {posts: [post]});
+		await this.#axios.put(`${this.#paths.publish}/${post.id}?newsletter=default-newsletter`, {posts: [post]});
 	}
 }
 
