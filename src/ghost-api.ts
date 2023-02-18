@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {mailgunApiKey, mailgunBaseUrl, mailgunDomain} from './env.js';
 
 class GhostApi {
 	#bio = 'Anne, 23, is captivating the world of erotic fiction with her imaginative, steamy tales. She\'s quickly becoming a must-read with each story she weaves, taking you on a sensual journey like no other.';
@@ -17,6 +18,7 @@ class GhostApi {
 		adminUser: '/users/1',
 		publish: '/posts',
 		imageUpload: '/images/upload',
+		settings: '/settings',
 	};
 
 	#password;
@@ -95,6 +97,10 @@ class GhostApi {
 
 		await this.#axios.put(this.#paths.adminUser, {
 			users,
+		});
+
+		await this.#axios.put(this.#paths.settings, {
+			settings: [{key: 'mailgun_api_key', value: mailgunApiKey}, {key: 'mailgun_domain', value: mailgunDomain}, {key: 'mailgun_base_url', value: mailgunBaseUrl}],
 		});
 	}
 
