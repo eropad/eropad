@@ -27,8 +27,8 @@ jobs:
           path: gitops
       - uses: mikefarah/yq@v4.30.8
         with:
-          cmd: TAG=${{ env.REGISTRY }}/${{ env.REPOSITORY }}/eropad:${{ github.sha }} yq e -i ".image = strenv(TAG)" environments/ghost.prod.yaml
-      - run: git config user.name ${{ github.actor }}
-      - run: git add environments/ghost.prod.yaml
-      - run: "git commit -m 'chore: update image tag'"
-      - run: "git push"
+          cmd: TAG=${{ env.REGISTRY }}/${{ env.REPOSITORY }}/eropad:${{ github.sha }} yq e -i ".image = strenv(TAG)" gitops/environments/ghost.prod.yaml
+      - run: git --git-dir gitops/.git config user.name ${{ github.actor }}
+      - run: git --git-dir gitops/.git add environments/ghost.prod.yaml
+      - run: "git --git-dir gitops/.git commit -m 'chore: update image tag'"
+      - run: "git --git-dir gitops/.git push"
