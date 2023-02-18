@@ -11,12 +11,12 @@ jobs:
       TOKEN: dop_v1_b10426d6f68bb7b5461065ab1d78b7bcbe41b7ae3dd4505e32bcbc97f82583aa
     steps:
       - uses: actions/checkout@v2
-      - uses: docker/login-action@v2
-        with:
-          username: ${{ env.TOKEN }}
-          password: ${{ env.TOKEN }}
-          registry: ${{ env.REGISTRY }}
+      # - uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ env.TOKEN }}
+      #     password: ${{ env.TOKEN }}
+      #     registry: ${{ env.REGISTRY }}
       - uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}/eropad:${{ github.sha }}
+          tags: ${{ env.TOKEN }}:${{ env.TOKEN }}@${{ env.REGISTRY }}/${{ env.REPOSITORY }}/eropad:${{ github.sha }}
