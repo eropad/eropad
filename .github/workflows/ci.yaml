@@ -29,6 +29,7 @@ jobs:
         with:
           cmd: TAG=${{ env.REGISTRY }}/${{ env.REPOSITORY }}/eropad:${{ github.sha }} yq e -i ".image = strenv(TAG)" gitops/environments/ghost.prod.yaml
       - run: git --git-dir gitops/.git config --global user.email ${{ github.actor }}
+      - run: git --git-dir gitops/.git config --global user.email ${{ github.actor }}@lovelustpassion.live
       - run: git --git-dir gitops/.git add gitops/environments/ghost.prod.yaml
       - run: "git --git-dir gitops/.git commit -m 'chore: update image tag'"
       - run: "git --git-dir gitops/.git push"
