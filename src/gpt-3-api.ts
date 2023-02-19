@@ -20,7 +20,7 @@ class Gpt3ApI {
 	];
 
 	#categories = [
-		'Hetrosexual',
+		'Straight',
 		'Lesbian',
 		'Gay',
 	];
