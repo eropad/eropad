@@ -1,6 +1,5 @@
 import {encode} from 'gpt-3-encoder';
 import {Configuration, OpenAIApi} from 'openai';
-import getRandom from './get-random.js';
 
 class Gpt3ApI {
 	#openai;
@@ -34,6 +33,10 @@ class Gpt3ApI {
 		this.#openai = new OpenAIApi(configuration);
 	}
 
+	#getRandom<T>(items: T[]) {
+		return items[Math.floor(Math.random() * items.length)];
+	}
+
 	async #generateText(input: string) {
 		const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
 			model: 'text-davinci-003',
@@ -62,8 +65,8 @@ class Gpt3ApI {
 	}
 
 	async generateBlog() {
-		const category = getRandom(this.#categories);
-		const adjective = getRandom(this.#adjectives);
+		const category = this.#getRandom(this.#categories);
+		const adjective = this.#getRandom(this.#adjectives);
 		const suffix = `About A Beautiful, Young And ${adjective} ${category} Couple.`;
 		const imgData = await this.#generateThumbnail(`The Featured Image For A Love Story ${suffix}`);
 		const body = await this.#generateText(`Write A Long, Explicit, Engaging And Highly Detailed Erotica ${suffix}`);
