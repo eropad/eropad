@@ -6,4 +6,4 @@
 
 - switched color scheme to auto (light(default)->dark->auto)
 
-- adsense
+- injected google adsense script in `<head></head>`
