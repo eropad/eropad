@@ -5,24 +5,24 @@ class Gpt3ApI {
 	#openai;
 
 	#adjectives = [
-		'Destructive',
-		'Romantic',
-		'Experimental',
-		'Wicked',
 		'Adventurous',
-		'Spontaneous',
-		'Impulsive',
-		'Dirty',
-		'Filthy',
 		'Debasing',
-		'Toxic',
+		'Destructive',
+		'Dirty',
+		'Experimental',
+		'Filthy',
+		'Impulsive',
 		'Passionate',
+		'Romantic',
+		'Spontaneous',
+		'Toxic',
+		'Wicked',
 	];
 
 	#categories = [
-		...Array.from<string>({length: 6}).fill('Lesbian'),
-		...Array.from<string>({length: 3}).fill('Straight'),
 		...Array.from<string>({length: 1}).fill('Gay'),
+		...Array.from<string>({length: 3}).fill('Straight'),
+		...Array.from<string>({length: 6}).fill('Lesbian'),
 	];
 
 	constructor(openAiSecret: string) {
