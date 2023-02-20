@@ -29,7 +29,7 @@ jobs:
         with:
           cmd: cd gitops && TAG=${{ env.REGISTRY }}/${{ env.REPOSITORY }}/eropad:${{ github.sha }} yq e -i ".image = strenv(TAG)" environments/ghost.prod.yaml
       - run: cd gitops && git config user.name ${{ github.actor }}
-      - run: cd gitops && git config user.email github-actions@github.com
+      - run: cd gitops && git config user.email ${{ github.event.pusher.email }}
       - run: cd gitops && git add environments/ghost.prod.yaml
       - run: cd gitops && git commit -m "${{ github.event.head_commit.message }}"
       - run: cd gitops && git push
