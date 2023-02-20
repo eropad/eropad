@@ -20,9 +20,9 @@ class Gpt3ApI {
 	];
 
 	#categories = [
-		'Straight',
-		'Lesbian',
-		'Gay',
+		...Array.from<string>({length: 5}).fill('Lesbian'),
+		...Array.from<string>({length: 3}).fill('Straight'),
+		...Array.from<string>({length: 2}).fill('Gay'),
 	];
 
 	constructor(openAiSecret: string) {
