@@ -6,7 +6,6 @@ class Gpt3ApI {
 
 	#adjectives = [
 		'Adventurous',
-		'test',
 		'Debasing',
 		'Destructive',
 		'Dirty',
