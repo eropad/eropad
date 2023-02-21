@@ -19,8 +19,8 @@ class Gpt3ApI {
 	];
 
 	#categories = [
-		...Array.from<string>({length: 6}).fill('Lesbian'),
-		...Array.from<string>({length: 3}).fill(''),
+		...Array.from<string>({length: 12}).fill('Lesbian'),
+		...Array.from<string>({length: 7}).fill(''),
 		...Array.from<string>({length: 1}).fill('Gay'),
 	];
 
