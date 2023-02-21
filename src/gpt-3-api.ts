@@ -6,7 +6,6 @@ class Gpt3ApI {
 
 	#adjectives = [
 		'Adventurous',
-		'Debasing',
 		'Destructive',
 		'Dirty',
 		'Experimental',
@@ -16,12 +15,11 @@ class Gpt3ApI {
 		'Romantic',
 		'Spontaneous',
 		'Toxic',
-		'Wicked',
 	];
 
 	#categories = [
 		...Array.from<string>({length: 6}).fill('Lesbian'),
-		...Array.from<string>({length: 3}).fill('Straight'),
+		...Array.from<string>({length: 3}).fill(''),
 		...Array.from<string>({length: 1}).fill('Gay'),
 	];
 
@@ -67,11 +65,11 @@ class Gpt3ApI {
 	async generateBlog() {
 		const category = this.#getRandom(this.#categories);
 		const adjective = this.#getRandom(this.#adjectives);
-		const suffix = `About A Beautiful, Young And ${adjective} ${category} Couple`;
-		const body = await this.#generateText(`Write A Lengthy, Explicit, Engaging And Highly Detailed Erotica ${suffix}.`);
-		const features = await this.#generateText(`Describe In Depth The Physical Features Of The People Involved In The Following Love Story:\n\n\n${body}`);
-		const imgData = await this.#generateThumbnail(`4K Ultra HD Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
-		const titleRaw = await this.#generateText(`Generate The Title For The Following Erotica:\n\n\n${body}`);
+		const suffix = category ? `About A ${adjective} ${category} Couple` : `About A ${adjective} Couple`;
+		const body = await this.#generateText(`Write A Lengthy, Engaging, Explicit And Highly Detailed Erotica ${suffix}.`);
+		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
+		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
+		const titleRaw = await this.#generateText(`Generate The Title For The Following Erotica ${suffix}:\n\n\n${body}`);
 		const titleRawSplit = titleRaw.split('"');
 
 		if (titleRawSplit.length !== 3) {
@@ -84,7 +82,7 @@ class Gpt3ApI {
 			throw new Error('Error generated empty title');
 		}
 
-		return [title, body, imgData, [category, adjective]] as [string, string, string, [string, string]];
+		return [title, body, imgData, [category || 'Straight', adjective]] as [string, string, string, [string, string]];
 	}
 }
 
