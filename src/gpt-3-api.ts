@@ -70,7 +70,7 @@ class Gpt3ApI {
 		const suffix = `About A Beautiful, Young And ${adjective} ${category} Couple`;
 		const body = await this.#generateText(`Write A Lengthy, Explicit, Engaging And Highly Detailed Erotica ${suffix}.`);
 		const features = await this.#generateText(`Describe In Depth The Physical Features Of The People Involved In The Following Love Story:\n\n\n${body}`);
-		const imgData = await this.#generateThumbnail(`The Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
+		const imgData = await this.#generateThumbnail(`4K Ultra HD Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
 		const titleRaw = await this.#generateText(`Generate The Title For The Following Erotica:\n\n\n${body}`);
 		const titleRawSplit = titleRaw.split('"');
 
