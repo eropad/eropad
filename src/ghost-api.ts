@@ -4,6 +4,7 @@ import {mailgunApiKey, mailgunBaseUrl, mailgunDomain} from './env.js';
 
 class GhostApi {
 	#bio = 'Anne, 23, is captivating the world of erotic fiction with her imaginative, steamy tales. She\'s quickly becoming a must-read with each story she weaves, taking you on a sensual journey like no other.';
+	#description = 'Discover the hottest stories ranging from steamy romance to hardcore action. Love, Lust & Passion has something for every one of your fantasies.';
 	#name = 'Anne Haenel';
 	#blogTitle = 'Love, Lust & Passion';
 	#email = 'anne.haenel.llp@gmail.com';
@@ -20,6 +21,7 @@ class GhostApi {
 		publish: '/posts',
 		imageUpload: '/images/upload',
 		settings: '/settings',
+		customThemeSettings: '/custom_theme_settings',
 	};
 
 	#password;
@@ -101,7 +103,25 @@ class GhostApi {
 		});
 
 		await this.#axios.put(this.#paths.settings, {
-			settings: [{key: 'mailgun_api_key', value: mailgunApiKey}, {key: 'mailgun_domain', value: mailgunDomain}, {key: 'mailgun_base_url', value: mailgunBaseUrl}],
+			settings: [
+				{key: 'mailgun_api_key', value: mailgunApiKey},
+				{key: 'mailgun_domain', value: mailgunDomain},
+				{key: 'mailgun_base_url', value: mailgunBaseUrl},
+				{key: 'description', value: this.#description},
+			],
+		});
+
+		const {data: {custom_theme_settings: customThemeSettings}} = await this.#axios.get<{
+			custom_theme_settings: [{key: string;value: string}];
+		}>(this.#paths.customThemeSettings);
+
+		const themeSetting = customThemeSettings.find(setting => setting.key === 'color_scheme')!;
+
+		themeSetting.value = 'Auto';
+
+		await this.#axios.put(this.#paths.customThemeSettings, {
+			// eslint-disable-next-line @typescript-eslint/naming-convention
+			custom_theme_settings: customThemeSettings,
 		});
 	}
 
