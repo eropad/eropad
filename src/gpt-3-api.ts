@@ -19,8 +19,8 @@ class Gpt3ApI {
 	];
 
 	#categories = [
-		...Array.from<string>({length: 12}).fill('Lesbian'),
-		...Array.from<string>({length: 7}).fill(''),
+		...Array.from<string>({length: 60}).fill('Lesbian'),
+		...Array.from<string>({length: 39}).fill(''),
 		...Array.from<string>({length: 1}).fill('Gay'),
 	];
 
@@ -38,7 +38,7 @@ class Gpt3ApI {
 
 	async #generateText(input: string) {
 		const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
-			model: 'text-davinci-003',
+			model: 'text-curie-003',
 			prompt: input,
 			// eslint-disable-next-line @typescript-eslint/naming-convention
 			max_tokens: 4096 - encode(input).length,
