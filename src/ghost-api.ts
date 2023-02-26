@@ -158,6 +158,7 @@ class GhostApi {
 		for (const nl of nlMap) {
 			nl.feedback_enabled = true;
 			nl.show_header_name = true;
+			nl.sort_order = 0;
 		}
 
 		await Promise.all(nlMap.map(async nl => {
