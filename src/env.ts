@@ -7,5 +7,6 @@ export const {
 	MAILGUN_API_KEY: mailgunApiKey = '',
 	MAILGUN_DOMAIN: mailgunDomain = '',
 	MAILGUN_BASE_URL: mailgunBaseUrl = '',
+	CODE_INJECTION_HEAD: codeInjectionHead = '',
 
 } = process.env;

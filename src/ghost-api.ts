@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 import axios from 'axios';
-import {mailgunApiKey, mailgunBaseUrl, mailgunDomain} from './env.js';
+import {codeInjectionHead, mailgunApiKey, mailgunBaseUrl, mailgunDomain} from './env.js';
 
 class GhostApi {
 	#bio = 'Anne, 23, is captivating the world of erotic fiction with her imaginative, steamy tales. She\'s quickly becoming a must-read with each story she weaves, taking you on a sensual journey like no other.';
@@ -108,6 +108,7 @@ class GhostApi {
 				{key: 'mailgun_domain', value: mailgunDomain},
 				{key: 'mailgun_base_url', value: mailgunBaseUrl},
 				{key: 'description', value: this.#description},
+				{key: 'codeinjection_head', value: codeInjectionHead},
 			],
 		});
 
