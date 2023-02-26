@@ -140,6 +140,9 @@ class GhostApi {
 
 		const defaultNewsletter = newsletters.find(nl => nl.slug === 'default-newsletter')!;
 
+		defaultNewsletter.name = 'Straight';
+		defaultNewsletter.slug = 'straight';
+
 		const nlMap = Array.from(new Set(categories)).map(category => {
 			const nl = newsletters.find(nl => nl.name === (category || 'Straight'));
 
@@ -150,7 +153,6 @@ class GhostApi {
 
 		for (const nl of newNewsletters) {
 			nl.feedback_enabled = true;
-			nl.subscribe_on_signup = false;
 			nl.show_header_name = true;
 		}
 
