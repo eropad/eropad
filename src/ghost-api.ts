@@ -1,6 +1,5 @@
 import crypto from 'node:crypto';
 import axios from 'axios';
-import {codeInjectionHead, mailgunApiKey, mailgunBaseUrl, mailgunDomain} from './env.js';
 
 class GhostApi {
 	#bio = 'Anne, 23, is captivating the world of erotic fiction with her imaginative, steamy tales. She\'s quickly becoming a must-read with each story she weaves, taking you on a sensual journey like no other.';
@@ -27,9 +26,17 @@ class GhostApi {
 	#password;
 	#axios;
 	#website;
+	#codeInjectionHead;
+	#mailgunApiKey;
+	#mailgunBaseUrl;
+	#mailgunDomain;
 
-	constructor(options: {domain: string; password: string}) {
+	constructor(options: {domain: string; password: string; codeInjectionHead: string; mailgunApiKey: string; mailgunBaseUrl: string; mailgunDomain: string}) {
 		this.#password = options.password;
+		this.#codeInjectionHead = options.codeInjectionHead;
+		this.#mailgunApiKey = options.mailgunApiKey;
+		this.#mailgunBaseUrl = options.mailgunBaseUrl;
+		this.#mailgunDomain = options.mailgunDomain;
 		this.#website = `https://stories.${options.domain}`;
 
 		this.#axios = axios.create({
@@ -104,11 +111,11 @@ class GhostApi {
 
 		await this.#axios.put(this.#paths.settings, {
 			settings: [
-				{key: 'mailgun_api_key', value: mailgunApiKey},
-				{key: 'mailgun_domain', value: mailgunDomain},
-				{key: 'mailgun_base_url', value: mailgunBaseUrl},
+				{key: 'mailgun_api_key', value: this.#mailgunApiKey},
+				{key: 'mailgun_domain', value: this.#mailgunDomain},
+				{key: 'mailgun_base_url', value: this.#mailgunBaseUrl},
 				{key: 'description', value: this.#description},
-				{key: 'codeinjection_head', value: codeInjectionHead},
+				{key: 'codeinjection_head', value: this.#codeInjectionHead},
 			],
 		});
 
