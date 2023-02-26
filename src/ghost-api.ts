@@ -113,7 +113,7 @@ class GhostApi {
 		});
 
 		const {data: {custom_theme_settings: customThemeSettings}} = await this.#axios.get<{
-			custom_theme_settings: [{key: string;value: string}];
+			custom_theme_settings: Array<{key: string;value: string}>;
 		}>(this.#paths.customThemeSettings);
 
 		const themeSetting = customThemeSettings.find(setting => setting.key === 'color_scheme')!;
