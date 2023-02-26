@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
 import axios from 'axios';
+import categories from './categories.js';
 
 class GhostApi {
 	#bio = 'Anne, 23, is captivating the world of erotic fiction with her imaginative, steamy tales. She\'s quickly becoming a must-read with each story she weaves, taking you on a sensual journey like no other.';
@@ -21,6 +22,7 @@ class GhostApi {
 		imageUpload: '/images/upload',
 		settings: '/settings',
 		customThemeSettings: '/custom_theme_settings',
+		newsletters: '/newsletters',
 	};
 
 	#password;
@@ -131,6 +133,38 @@ class GhostApi {
 			// eslint-disable-next-line @typescript-eslint/naming-convention
 			custom_theme_settings: customThemeSettings,
 		});
+
+		const {data: {newsletters}} = await this.#axios.get<{
+			newsletters: Array<Record<string, unknown>>;
+		}>(this.#paths.newsletters);
+
+		const defaultNewsletter = newsletters.find(nl => nl.slug === 'default-newsletter')!;
+
+		const nlMap = Array.from(new Set(categories)).map(category => {
+			const nl = newsletters.find(nl => nl.name === (category || 'Straight'));
+
+			return nl ?? {name: (category || 'Straight')};
+		});
+
+		const newNewsletters = [defaultNewsletter, ...nlMap];
+
+		for (const nl of newNewsletters) {
+			nl.feedback_enabled = true;
+			nl.subscribe_on_signup = false;
+			nl.show_header_name = true;
+		}
+
+		await Promise.all(newNewsletters.map(async nl => {
+			if (nl.id) {
+				return this.#axios.put(`${this.#paths.newsletters}/${nl.id as string}`, {
+					newsletters: [nl],
+				});
+			}
+
+			return this.#axios.post(this.#paths.newsletters, {
+				newsletters: [nl],
+			});
+		}));
 	}
 
 	async publish(title: string, text: string, imgData: string, tags: [string, string]) {
@@ -173,7 +207,7 @@ class GhostApi {
 		post.twitter_description = post.excerpt;
 		post.status = 'published';
 
-		await this.#axios.put(`${this.#paths.publish}/${post.id}?newsletter=default-newsletter`, {posts: [post]});
+		await this.#axios.put(`${this.#paths.publish}/${post.id}`, {posts: [post]});
 	}
 }
 

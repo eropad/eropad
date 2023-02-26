@@ -1,5 +1,6 @@
 import {encode} from 'gpt-3-encoder';
 import {Configuration, OpenAIApi} from 'openai';
+import categories from './categories.js';
 
 class Gpt3ApI {
 	#openai;
@@ -18,12 +19,6 @@ class Gpt3ApI {
 		'Toxic',
 	];
 
-	#categories = [
-		...Array.from<string>({length: 60}).fill('Lesbian'),
-		...Array.from<string>({length: 39}).fill(''),
-		...Array.from<string>({length: 1}).fill('Gay'),
-	];
-
 	constructor(openAiSecret: string) {
 		const configuration = new Configuration({
 			apiKey: openAiSecret,
@@ -38,10 +33,10 @@ class Gpt3ApI {
 
 	async #generateText(input: string) {
 		const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
-			model: 'text-davinci-001',
+			model: 'text-davinci-003',
 			prompt: input,
 			// eslint-disable-next-line @typescript-eslint/naming-convention
-			max_tokens: 4096 - encode(input).length,
+			max_tokens: 4097 - encode(input).length,
 		});
 
 		const text = result.text?.trim();
@@ -64,7 +59,7 @@ class Gpt3ApI {
 	}
 
 	async generateBlog() {
-		const category = this.#getRandom(this.#categories);
+		const category = this.#getRandom(categories);
 		const adjective = this.#getRandom(this.#adjectives);
 		const suffix = category ? `About A ${adjective} ${category} Couple` : `About A ${adjective} Couple`;
 		const body = await this.#generateText(`Write A Lengthy, Engaging, Explicit And Highly Detailed Erotica ${suffix}.`);
