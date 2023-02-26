@@ -138,10 +138,12 @@ class GhostApi {
 			newsletters: Array<Record<string, unknown>>;
 		}>(this.#paths.newsletters);
 
-		const defaultNewsletter = newsletters.find(nl => nl.slug === 'default-newsletter')!;
+		const defaultNewsletter = newsletters.find(nl => nl.slug === 'default-newsletter');
 
-		defaultNewsletter.name = 'Straight';
-		defaultNewsletter.slug = 'straight';
+		if (defaultNewsletter) {
+			defaultNewsletter.name = 'Straight';
+			defaultNewsletter.slug = 'straight';
+		}
 
 		const nlMap = Array.from(new Set(categories)).map(category => {
 			const nl = newsletters.find(nl => nl.name === (category || 'Straight'));
@@ -149,14 +151,16 @@ class GhostApi {
 			return nl ?? {name: (category || 'Straight')};
 		});
 
-		const newNewsletters = [defaultNewsletter, ...nlMap];
+		if (defaultNewsletter) {
+			nlMap.push(defaultNewsletter);
+		}
 
-		for (const nl of newNewsletters) {
+		for (const nl of nlMap) {
 			nl.feedback_enabled = true;
 			nl.show_header_name = true;
 		}
 
-		await Promise.all(newNewsletters.map(async nl => {
+		await Promise.all(nlMap.map(async nl => {
 			if (nl.id) {
 				return this.#axios.put(`${this.#paths.newsletters}/${nl.id as string}`, {
 					newsletters: [nl],
