@@ -38,7 +38,7 @@ class Gpt3ApI {
 
 	async #generateText(input: string) {
 		const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
-			model: 'text-curie-003',
+			model: 'text-davinci-001',
 			prompt: input,
 			// eslint-disable-next-line @typescript-eslint/naming-convention
 			max_tokens: 4096 - encode(input).length,
