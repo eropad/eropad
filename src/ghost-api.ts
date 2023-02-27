@@ -177,7 +177,10 @@ class GhostApi {
 	}
 
 	async publish(title: string, text: string, imgData: string, tags: [string, string]) {
-		const category = tags[0] || straightCategory;
+		if (!tags[0]) {
+			tags[0] = straightCategory;
+		}
+
 		const image = await this.#upload(imgData);
 		const html = this.#textToHtml(text);
 
@@ -191,7 +194,7 @@ class GhostApi {
 					tags,
 					featured: true,
 					// eslint-disable-next-line @typescript-eslint/naming-convention
-					primary_tag: category,
+					primary_tag: tags[0],
 					// eslint-disable-next-line @typescript-eslint/naming-convention
 					og_image: image,
 					// eslint-disable-next-line @typescript-eslint/naming-convention
@@ -217,7 +220,7 @@ class GhostApi {
 		post.twitter_description = post.excerpt;
 		post.status = 'published';
 
-		await this.#axios.put(`${this.#paths.publish}/${post.id}?newsletter=${category.toLowerCase()}`, {posts: [post]});
+		await this.#axios.put(`${this.#paths.publish}/${post.id}?newsletter=${tags[0].toLowerCase()}`, {posts: [post]});
 	}
 }
 
