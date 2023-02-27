@@ -15,6 +15,7 @@ class GhostApi {
 	#profileImage = 'https://i.imgur.com/g8pbLVS.png';
 	#twitter = 'anne_haenel';
 	#facebook = 'anne_haenel';
+	#logo = 'https://ghost.org/images/logos/ghost-logo-orb.png';
 
 	#paths = {
 		authSetup: '/authentication/setup',
@@ -120,6 +121,7 @@ class GhostApi {
 				{key: 'mailgun_base_url', value: this.#mailgunBaseUrl},
 				{key: 'description', value: this.#description},
 				{key: 'codeinjection_head', value: this.#codeInjectionHead},
+				{key: 'logo', value: this.#logo},
 			],
 		});
 
