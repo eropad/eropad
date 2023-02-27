@@ -221,7 +221,6 @@ class GhostApi {
 		post.meta_description = post.excerpt;
 		post.twitter_description = post.excerpt;
 		post.status = 'published';
-		post.custom_excerpt = post.excerpt.slice(0, 297).trim().padEnd(300, '.');
 
 		await this.#axios.put(`${this.#paths.publish}/${post.id}?newsletter=${tags[0].toLowerCase()}`, {posts: [post]});
 	}
