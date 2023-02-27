@@ -124,7 +124,7 @@ class GhostApi {
 		});
 
 		const {data: {custom_theme_settings: customThemeSettings}} = await this.#axios.get<{
-			custom_theme_settings: Array<{key: string;value: string}>;
+			custom_theme_settings: Array<{key: string; value: string}>;
 		}>(this.#paths.customThemeSettings);
 
 		const themeSetting = customThemeSettings.find(setting => setting.key === 'color_scheme')!;
@@ -184,7 +184,7 @@ class GhostApi {
 		const image = await this.#upload(imgData);
 		const html = this.#textToHtml(text);
 
-		const {data: {posts: {0: post}}} = await this.#axios.post<{posts: [{status: string; excerpt: string; og_description: string; twitter_description: string; meta_description: string; id: string}]}>(`${this.#paths.publish}?source=html`, {
+		const {data: {posts: {0: post}}} = await this.#axios.post<{posts: [Record<string, string>]}>(`${this.#paths.publish}?source=html`, {
 			posts: [
 				{
 					title,
@@ -219,6 +219,7 @@ class GhostApi {
 		post.meta_description = post.excerpt;
 		post.twitter_description = post.excerpt;
 		post.status = 'published';
+		post.custom_excerpt = post.excerpt;
 
 		await this.#axios.put(`${this.#paths.publish}/${post.id}?newsletter=${tags[0].toLowerCase()}`, {posts: [post]});
 	}
