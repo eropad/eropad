@@ -2,6 +2,8 @@ import crypto from 'node:crypto';
 import axios from 'axios';
 import categories from './categories.js';
 
+const straightCategory = 'Straight';
+
 class GhostApi {
 	#bio = 'Anne, 23, is captivating the world of erotic fiction with her imaginative, steamy tales. She\'s quickly becoming a must-read with each story she weaves, taking you on a sensual journey like no other.';
 	#description = 'Discover the hottest stories ranging from steamy romance to hardcore action. Love, Lust & Passion has something for every one of your fantasies.';
@@ -141,14 +143,14 @@ class GhostApi {
 		const defaultNewsletter = newsletters.find(nl => nl.slug === 'default-newsletter');
 
 		if (defaultNewsletter) {
-			defaultNewsletter.name = 'Straight';
-			defaultNewsletter.slug = 'straight';
+			defaultNewsletter.name = straightCategory;
+			defaultNewsletter.slug = straightCategory;
 		}
 
 		const nlMap = Array.from(new Set(categories)).map(category => {
-			const nl = newsletters.find(nl => nl.name === (category || 'Straight'));
+			const nl = newsletters.find(nl => nl.name === (category || straightCategory));
 
-			return nl ?? {name: (category || 'Straight')};
+			return nl ?? {name: (category || straightCategory)};
 		});
 
 		if (defaultNewsletter) {
@@ -175,6 +177,7 @@ class GhostApi {
 	}
 
 	async publish(title: string, text: string, imgData: string, tags: [string, string]) {
+		const category = tags[0] || straightCategory;
 		const image = await this.#upload(imgData);
 		const html = this.#textToHtml(text);
 
@@ -188,7 +191,7 @@ class GhostApi {
 					tags,
 					featured: true,
 					// eslint-disable-next-line @typescript-eslint/naming-convention
-					primary_tag: tags[0],
+					primary_tag: category,
 					// eslint-disable-next-line @typescript-eslint/naming-convention
 					og_image: image,
 					// eslint-disable-next-line @typescript-eslint/naming-convention
@@ -214,7 +217,7 @@ class GhostApi {
 		post.twitter_description = post.excerpt;
 		post.status = 'published';
 
-		await this.#axios.put(`${this.#paths.publish}/${post.id}`, {posts: [post]});
+		await this.#axios.put(`${this.#paths.publish}/${post.id}?newsletter=${category.toLowerCase()}`, {posts: [post]});
 	}
 }
 
