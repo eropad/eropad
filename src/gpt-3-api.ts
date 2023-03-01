@@ -62,8 +62,8 @@ class Gpt3ApI {
 		const category = this.#getRandom(categories);
 		const adjective = this.#getRandom(this.#adjectives);
 		const suffix = category ? `About ${adjective} ${category} Couple` : `About ${adjective} Couple`;
-		const ending = this.#getRandom(['Happy', 'Surprise', 'Sad']);
-		const body = await this.#generateText(`Write A Lengthy, Engaging, Explicit And Highly Detailed Erotica ${suffix} With A ${ending} Ending.`);
+		const ending = this.#getRandom(['Happy', 'Surprise', 'Sad', 'Shocking']);
+		const body = await this.#generateText(`Write A Lengthy, Engaging, Explicit And High Quality Erotica ${suffix} With A ${ending} Ending.`);
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
 		const titleRaw = await this.#generateText(`Generate The Title For The Following Erotica ${suffix}:\n\n\n${body}`);
