@@ -16,7 +16,6 @@ class GhostApi {
 	#twitter = 'anne_haenel';
 	#facebook = 'anne_haenel';
 	#logo = 'https://ghost.org/images/logos/ghost-logo-orb.png';
-	#icon = 'https://stories.lovelustpassion.live/favicon.ico';
 
 	#paths = {
 		authSetup: '/authentication/setup',
@@ -123,7 +122,7 @@ class GhostApi {
 				{key: 'description', value: this.#description},
 				{key: 'codeinjection_head', value: this.#codeInjectionHead},
 				{key: 'logo', value: this.#logo},
-				{key: 'icon', value: this.#icon},
+				{key: 'icon', value: this.#logo},
 			],
 		});
 
