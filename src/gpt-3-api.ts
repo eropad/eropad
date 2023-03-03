@@ -71,13 +71,14 @@ class Gpt3ApI {
 		03. Create a setting conducive to eroticism
 		04. Develop interesting characters
 		05. Create a compelling plot
-		06. Build sexual tension through description and dialogue
-		07. Write a strong opening
-		08. Use tension, conflict, suspense, and cliffhangers
-		09. Be descriptive with vivid, sensory language
-		10. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the story moving forward
-		11. Experiment and push boundaries
-		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time`);
+		06. Write a strong opening
+		07. Build sexual tension through description and dialogue
+		08. Show, don't tell
+		09. Use tension, conflict, suspense, and cliffhangers
+		10. Be descriptive with vivid, sensory language
+		11. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the story moving forward
+		12. Experiment and push boundaries
+		13. Write with the intention of captivating readers and ensuring that the erotica endures the test of time`);
 
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
