@@ -16,6 +16,8 @@ class Gpt3ApI {
 		'A Romantic',
 		'A Spontaneous',
 		'A Toxic',
+		'A Wicked',
+		'A Debasing',
 	];
 
 	constructor(openAiSecret: string) {
@@ -62,7 +64,22 @@ class Gpt3ApI {
 		const adjective = this.#getRandom(this.#adjectives);
 		const suffix = category ? `About ${adjective} ${category} Couple` : `About ${adjective} Couple`;
 		const ending = this.#getRandom(['Happy', 'Surprise', 'Sad', 'Shocking']);
-		const body = await this.#generateText(`Write A Lengthy, Engaging, Explicit And High Quality Erotica ${suffix} With A ${ending} Ending.`);
+
+		const body = await this.#generateText(`Using the tips below, write a long, engaging, deep, detailed, descriptive, explicit and super high quality erotica ${suffix} with a ${ending} Ending:
+		1. Define a genre and audience
+		2. Start with an inspiring idea
+		3. Develop interesting characters
+		4. Create a compelling plot
+		5. Write a strong opening
+		6. Create a setting conducive to eroticism
+		7. Show, don't tell
+		8. Use tension, conflict, suspense, and cliffhangers
+		9. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the story moving forward
+		10. Build sexual tension through description and dialogue
+		11. Be descriptive with vivid, sensory language
+		12. Experiment and push boundaries
+		13. Write with the intention of captivating readers and ensuring that the erotica endures the test of time`);
+
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
 		const titleRaw = await this.#generateText(`Generate The Title For The Following Erotica ${suffix}:\n\n\n${body}`);
