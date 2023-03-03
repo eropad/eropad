@@ -66,7 +66,7 @@ class Gpt3ApI {
 		const ending = this.#getRandom(['Happy', 'Surprise', 'Sad', 'Shocking']);
 
 		const body = await this.#generateText(`Using the tips below, write a long, engaging, deep, detailed, descriptive, explicit and super high quality erotica ${suffix} with a ${ending} Ending:
-		1. Define a genre and audience
+		1. Decide a genre and audience
 		2. Start with an inspiring idea
 		3. Develop interesting characters
 		4. Create a compelling plot
