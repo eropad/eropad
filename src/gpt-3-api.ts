@@ -65,7 +65,7 @@ class Gpt3ApI {
 		const suffix = category ? `About ${adjective} ${category} Couple` : `About ${adjective} Couple`;
 		const ending = this.#getRandom(['Happy', 'Surprise', 'Sad', 'Shocking']);
 
-		const body = await this.#generateText(`Using the tips below, write a long, engaging, deep, detailed, descriptive, explicit, and super high quality erotica ${suffix} with a ${ending} Ending:
+		const body = await this.#generateText(`Using the tips below, write a long, lusty, engaging, deep, detailed, descriptive, explicit, and super high-quality erotica ${suffix} with a ${ending} Ending:
 		01. Start with an inspiring idea
 		02. Decide a genre and audience
 		03. Create a setting conducive to eroticism
@@ -76,7 +76,7 @@ class Gpt3ApI {
 		08. Show, don't tell
 		09. Use tension, conflict, suspense, and cliffhangers
 		10. Be descriptive with vivid, sensory language
-		11. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the story moving forward
+		11. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the erotica moving forward
 		12. Experiment and push boundaries
 		13. Write with the intention of captivating readers and ensuring that the erotica endures the test of time`);
 
