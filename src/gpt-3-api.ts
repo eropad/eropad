@@ -93,7 +93,10 @@ class Gpt3ApI {
 		const suffix = category ? `About ${adjective} ${category} Couple` : `About ${adjective} Couple`;
 		const ending = this.#getRandom(['A Satisfying', 'A Surprise', 'A Sad', 'A Shocking', 'An Unexpected']);
 
-		const body = await this.#generateText(`01. Begin with an inspiring idea.
+		const body = await this.#generateText(`Using the tips above, write a long/lengthy (~10,000 words), deep, detailed, engaging, explicit, lustful and super high-quality erotica ${suffix} with ${ending} ending:
+
+
+		01. Begin with an inspiring idea.
 		02. Determine the genre and target audience.
 		03. Create a setting that enhances eroticism.
 		04. Develop interesting characters, including their physical attributes and motivations/intentions.
@@ -104,10 +107,7 @@ class Gpt3ApI {
 		09. Be descriptive using vivid, seductive, sensory language that may include profanity or vulgarity.
 		10. Ensure smooth flow, fully developed characters, and appropriate pacing that keeps the erotica moving forward.
 		11. Experiment and push boundaries by exploring taboos and non-consensual themes such as Wholesome, Lovely, Domination, Submission, BDSM, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity, infidelity, and heartbreak.
-		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time and always comes out on top.
-
-
-		Using the tips above, write a long/lengthy (~10,000 words), deep, detailed, engaging, explicit, lustful and super high-quality erotica ${suffix} with ${ending} ending.`);
+		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time and always comes out on top.`);
 
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
