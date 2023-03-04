@@ -93,7 +93,7 @@ class Gpt3ApI {
 		const suffix = category ? `About ${adjective} ${category} Couple` : `About ${adjective} Couple`;
 		const ending = this.#getRandom(['A Satisfying', 'A Surprise', 'A Sad', 'A Shocking', 'An Unexpected']);
 
-		const body = await this.#generateText(`Using the tips above, write a long/lengthy (~10,000 words), deep, detailed, engaging, explicit, lustful and super high-quality erotica ${suffix} with ${ending} ending:
+		const body = await this.#generateText(`Using the tips below, write a long/lengthy (~10,000 words), deep, detailed, engaging, explicit, lustful and super high-quality erotica ${suffix} with ${ending} ending:
 
 
 		01. Begin with an inspiring idea.
