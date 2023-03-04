@@ -107,7 +107,7 @@ class Gpt3ApI {
 		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time and always comes out on top
 		
 		
-		Using the tips above, write a long (~10,000 words), lustful, engaging, deep, detailed, explicit, and super high-quality erotica ${suffix} with ${ending} Ending.`);
+		Using the tips above, write a long, lustful, engaging, deep, detailed, explicit, and super high-quality erotica ${suffix} with ${ending} Ending.`);
 
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
