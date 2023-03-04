@@ -67,10 +67,10 @@ class Gpt3ApI {
 		const category = this.#getRandom(categories);
 		const adjective = this.#getRandom(this.#adjectives);
 		const suffix = category ? `About ${adjective} ${category} Couple` : `About ${adjective} Couple`;
-		const ending = this.#getRandom(['Happy', 'Surprise', 'Sad', 'Shocking', 'Unexpected']);
+		const ending = this.#getRandom(['A Happy', 'A Surprise', 'A Sad', 'A Shocking', 'An Unexpected']);
 
-		const body = await this.#generateText(`Using the tips below, write a long (10,000 words), lustful, engaging, deep, detailed, explicit, and super high-quality erotica ${suffix} with a ${ending} Ending:
-		01. Start with an inspiring idea
+		const body = await this.#generateText(
+			`01. Start with an inspiring idea
 		02. Decide a genre and audience
 		03. Create a setting conducive to eroticism
 		04. Develop interesting characters
@@ -82,7 +82,11 @@ class Gpt3ApI {
 		10. Be descriptive with vivid, profane/vulgar, seductive, sensory language
 		11. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the erotica moving forward
 		12. Experiment and push boundaries exploring taboos and non-consensual themes (example: Wholesome, Lovely, Domination, Submission, BDSM, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity)
-		13. Write with the intention of captivating readers and ensuring that the erotica endures the test of time`);
+		13. Write with the intention of captivating readers and ensuring that the erotica endures the test of time
+		
+		
+		Using the tips above, write a long (10,000 words), lustful, engaging, deep, detailed, explicit, and super high-quality erotica ${suffix} with ${ending} Ending.`,
+		);
 
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
