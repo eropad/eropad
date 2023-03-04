@@ -109,20 +109,18 @@ class Gpt3ApI {
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
 		const titleRaw = await this.#generateText(`Generate The Title For The Following Erotica ${suffix}:\n\n\n${body}`);
-		const titleRawSplit = titleRaw.split('"');
 
-		if (titleRawSplit.length !== 3) {
-			throw new Error('Error `titleRawSplit.length !== 3`');
+		let title: string;
+
+		if (titleRaw.startsWith('Title: ')) {
+			title = titleRaw.split('Title: ')[1];
+		} else {
+			const titleRawSplit = titleRaw.split('"');
+
+			title = titleRawSplit.length === 3 ? titleRawSplit[1] : titleRaw;
 		}
 
-		const title = titleRaw.split('"')[1];
-		const titleExists = title || (titleRaw.startsWith('Title: ') && titleRaw.split('Title: ')[1]);
-
-		if (!titleExists) {
-			throw new Error('Error generated empty title');
-		}
-
-		return [titleExists, body, imgData, [category, adjective.split(' ')[1]]] as [string, string, string, [string, string]];
+		return [title, body, imgData, [category, adjective.split(' ')[1]]] as [string, string, string, [string, string]];
 	}
 }
 
