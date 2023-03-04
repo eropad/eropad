@@ -122,6 +122,7 @@ class GhostApi {
 				{key: 'description', value: this.#description},
 				{key: 'codeinjection_head', value: this.#codeInjectionHead},
 				{key: 'icon', value: this.#icon},
+				{key: 'comments_enabled', value: 'all'},
 			],
 		});
 
