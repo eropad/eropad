@@ -90,11 +90,7 @@ class GhostApi {
 			password: this.#password,
 		});
 
-		const cookie = headers['set-cookie'];
-
-		if (!cookie) {
-			throw new Error('Error while logging in');
-		}
+		const cookie = headers['set-cookie']!;
 
 		this.#axios.defaults.headers.Cookie = cookie;
 

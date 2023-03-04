@@ -44,8 +44,12 @@ class Gpt3ApI {
 
 		const text = result.text?.trim();
 
-		if (result.finish_reason !== 'stop' || !text) {
-			throw new Error('Error while generating text');
+		if (result.finish_reason !== 'stop') {
+			throw new Error(`Error finish_reason is ${result.finish_reason!}`);
+		}
+
+		if (!text) {
+			throw new Error('Error generated empty text');
 		}
 
 		return text;
