@@ -52,7 +52,10 @@ class Gpt3ApI {
 			}
 
 			return text;
-		} catch {
+		} catch (error: unknown) {
+			console.log(error);
+			console.log('Retrying...');
+
 			const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
 				model: 'text-davinci-003',
 				prompt: input,
