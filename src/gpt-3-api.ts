@@ -19,6 +19,7 @@ class Gpt3ApI {
 		'A Wicked',
 		'A Debasing',
 		'A Lovely',
+		'A Wholesome',
 	];
 
 	constructor(openAiSecret: string) {
