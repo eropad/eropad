@@ -93,21 +93,21 @@ class Gpt3ApI {
 		const suffix = category ? `About ${adjective} ${category} Couple` : `About ${adjective} Couple`;
 		const ending = this.#getRandom(['A Satisfying', 'A Surprise', 'A Sad', 'A Shocking', 'An Unexpected']);
 
-		const body = await this.#generateText(`01. Start with an inspiring idea
-		02. Decide a genre and audience
-		03. Create a setting conducive to eroticism
-		04. Develop interesting characters, their physical features, their intention/motivation
-		05. Create a compelling plot
-		06. Write a strong opening
-		07. Build sexual tension through description and dialogue (show, don't tell)
-		08. Use tension, conflict, suspense, and cliffhangers
-		09. Be descriptive with vivid, profane/vulgar, seductive, sensory language
-		10. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the erotica moving forward
-		11. Experiment and push boundaries exploring taboos and non-consensual themes (example: Wholesome, Lovely, Domination, Submission, BDSM, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity, infidelity, heartbreak)
-		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time and always comes out on top
+		const body = await this.#generateText(`01. Begin with an inspiring idea.
+		02. Determine the genre and target audience.
+		03. Create a setting that enhances eroticism.
+		04. Develop interesting characters, including their physical attributes and motivations/intentions.
+		05. Create a compelling plot.
+		06. Write a strong opening.
+		07. Build sexual tension through descriptive language and dialogue (show, don't tell).
+		08. Use tension, conflict, suspense, and cliffhangers.
+		09. Be descriptive using vivid, seductive, sensory language that may include profanity or vulgarity.
+		10. Ensure smooth flow, fully developed characters, and appropriate pacing that keeps the erotica moving forward.
+		11. Experiment and push boundaries by exploring taboos and non-consensual themes such as Wholesome, Lovely, Domination, Submission, BDSM, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity, infidelity, and heartbreak.
+		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time and always comes out on top.
 
 
-		Using the tips above, write a long/lengthy (~10,000 words), lustful, engaging, deep, detailed, explicit, and super high-quality erotica ${suffix} with ${ending} Ending.`);
+		Using the tips above, write a long/lengthy (~10,000 words), deep, detailed, engaging, explicit, lustful and super high-quality erotica ${suffix} with ${ending} ending.`);
 
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
