@@ -54,7 +54,7 @@ class Gpt3ApI {
 			return text;
 		} catch {
 			const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
-				model: 'gpt-3.5-turbo',
+				model: 'text-davinci-003',
 				prompt: input,
 				// eslint-disable-next-line @typescript-eslint/naming-convention
 				max_tokens: 4097 - encode(input).length,
