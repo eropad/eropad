@@ -103,8 +103,8 @@ class Gpt3ApI {
 		08. Use tension, conflict, suspense, and cliffhangers
 		09. Be descriptive with vivid, profane/vulgar, seductive, sensory language
 		10. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the erotica moving forward
-		11. Experiment and push boundaries exploring taboos and non-consensual themes (example: Wholesome, Lovely, Domination, Submission, BDSM, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity)
-		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time
+		11. Experiment and push boundaries exploring taboos and non-consensual themes (example: Wholesome, Lovely, Domination, Submission, BDSM, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity, infidelity, heartbreak)
+		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time and always comes out on top
 		
 		
 		Using the tips above, write a long (~10,000 words), lustful, engaging, deep, detailed, explicit, and super high-quality erotica ${suffix} with ${ending} Ending.`);
