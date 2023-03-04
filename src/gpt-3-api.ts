@@ -32,25 +32,46 @@ class Gpt3ApI {
 		return items[Math.floor(Math.random() * items.length)];
 	}
 
-	async #generateText(input: string) {
-		const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
-			model: 'text-davinci-003',
-			prompt: input.toLowerCase().trim(),
-			// eslint-disable-next-line @typescript-eslint/naming-convention
-			max_tokens: 4097 - encode(input).length,
-		});
+	async #generateText(rawInput: string) {
+		const input = rawInput.toLowerCase().trim();
 
-		const text = result.text?.trim();
+		try {
+			const {data: {choices: {0: result}}} = await this.#openai.createChatCompletion({
+				model: 'gpt-3.5-turbo',
+				messages: [{role: 'user', content: input}],
+			});
 
-		if (result.finish_reason !== 'stop') {
-			throw new Error(`Error finish_reason is ${result.finish_reason!}`);
+			const text = result.message?.content.trim();
+
+			if (result.finish_reason !== 'stop') {
+				throw new Error(`Error finish_reason is ${result.finish_reason!}`);
+			}
+
+			if (!text) {
+				throw new Error('Error generated empty text');
+			}
+
+			return text;
+		} catch {
+			const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
+				model: 'gpt-3.5-turbo',
+				prompt: input,
+				// eslint-disable-next-line @typescript-eslint/naming-convention
+				max_tokens: 4097 - encode(input).length,
+			});
+
+			const text = result.text?.trim();
+
+			if (result.finish_reason !== 'stop') {
+				throw new Error(`Error finish_reason is ${result.finish_reason!}`);
+			}
+
+			if (!text) {
+				throw new Error('Error generated empty text');
+			}
+
+			return text;
 		}
-
-		if (!text) {
-			throw new Error('Error generated empty text');
-		}
-
-		return text;
 	}
 
 	async #generateThumbnail(input: string) {
@@ -67,21 +88,20 @@ class Gpt3ApI {
 		const category = this.#getRandom(categories);
 		const adjective = this.#getRandom(this.#adjectives);
 		const suffix = category ? `About ${adjective} ${category} Couple` : `About ${adjective} Couple`;
-		const ending = this.#getRandom(['A Happy', 'A Surprise', 'A Sad', 'A Shocking', 'An Unexpected']);
+		const ending = this.#getRandom(['A Satisfying', 'A Surprise', 'A Sad', 'A Shocking', 'An Unexpected']);
 
 		const body = await this.#generateText(`01. Start with an inspiring idea
 		02. Decide a genre and audience
 		03. Create a setting conducive to eroticism
-		04. Develop interesting characters
+		04. Develop interesting characters, their physical features, their intention/motivation
 		05. Create a compelling plot
 		06. Write a strong opening
-		07. Build sexual tension through description and dialogue
-		08. Show, don't tell
-		09. Use tension, conflict, suspense, and cliffhangers
-		10. Be descriptive with vivid, profane/vulgar, seductive, sensory language
-		11. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the erotica moving forward
-		12. Experiment and push boundaries exploring taboos and non-consensual themes (example: Wholesome, Lovely, Domination, Submission, BDSM, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity)
-		13. Write with the intention of captivating readers and ensuring that the erotica endures the test of time
+		07. Build sexual tension through description and dialogue (show, don't tell)
+		08. Use tension, conflict, suspense, and cliffhangers
+		09. Be descriptive with vivid, profane/vulgar, seductive, sensory language
+		10. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the erotica moving forward
+		11. Experiment and push boundaries exploring taboos and non-consensual themes (example: Wholesome, Lovely, Domination, Submission, BDSM, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity)
+		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time
 		
 		
 		Using the tips above, write a lengthy (~10,000 words), lustful, engaging, deep, detailed, explicit, and super high-quality erotica ${suffix} with ${ending} Ending.`);
