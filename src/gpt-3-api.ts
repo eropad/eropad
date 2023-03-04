@@ -105,9 +105,9 @@ class Gpt3ApI {
 		10. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the erotica moving forward
 		11. Experiment and push boundaries exploring taboos and non-consensual themes (example: Wholesome, Lovely, Domination, Submission, BDSM, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity, infidelity, heartbreak)
 		12. Write with the intention of captivating readers and ensuring that the erotica endures the test of time and always comes out on top
-		
-		
-		Using the tips above, write a long, lustful, engaging, deep, detailed, explicit, and super high-quality erotica ${suffix} with ${ending} Ending.`);
+
+
+		Using the tips above, write a long/lengthy (~10,000 words), lustful, engaging, deep, detailed, explicit, and super high-quality erotica ${suffix} with ${ending} Ending.`);
 
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
