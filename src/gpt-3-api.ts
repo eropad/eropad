@@ -83,7 +83,7 @@ class Gpt3ApI {
 		09. Use tension, conflict, suspense, and cliffhangers
 		10. Be descriptive with vivid, profane/vulgar, seductive, sensory language
 		11. Ensure smooth flow, fully developed characters, and appropriate pacing which keeps the erotica moving forward
-		12. Experiment and push boundaries exploring taboos and non-consensual themes
+		12. Experiment and push boundaries exploring taboos and non-consensual themes (example: BDSM, Horror, Transgressive, Paranormal, Incest, Polygamy, Orgy)
 		13. Write with the intention of captivating readers and ensuring that the erotica endures the test of time`);
 
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
