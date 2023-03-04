@@ -53,7 +53,7 @@ class Gpt3ApI {
 
 			return text;
 		} catch (error: unknown) {
-			console.log(error);
+			console.error(error);
 			console.log('Retrying...');
 
 			const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
