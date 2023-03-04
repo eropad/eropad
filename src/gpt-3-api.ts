@@ -7,6 +7,7 @@ class Gpt3ApI {
 
 	#adjectives = [
 		'An Adventurous',
+		'A Debasing',
 		'A Destructive',
 		'A Dirty',
 		'An Experimental',
@@ -17,7 +18,6 @@ class Gpt3ApI {
 		'A Spontaneous',
 		'A Toxic',
 		'A Wicked',
-		'A Debasing',
 	];
 
 	constructor(openAiSecret: string) {
