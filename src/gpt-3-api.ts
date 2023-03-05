@@ -35,46 +35,24 @@ class Gpt3ApI {
 	async #generateText(rawInput: string) {
 		const input = rawInput.toLowerCase().trim();
 
-		try {
-			const {data: {choices: {0: result}}} = await this.#openai.createChatCompletion({
-				model: 'gpt-3.5-turbo',
-				messages: [{role: 'user', content: input}],
-			});
+		const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
+			model: 'text-davinci-003',
+			prompt: input,
+			// eslint-disable-next-line @typescript-eslint/naming-convention
+			max_tokens: 4097 - encode(input).length,
+		});
 
-			const text = result.message?.content.trim();
+		const text = result.text?.trim();
 
-			if (result.finish_reason !== 'stop') {
-				throw new Error(`Error finish_reason is ${result.finish_reason!}`);
-			}
-
-			if (!text) {
-				throw new Error('Error generated empty text');
-			}
-
-			return text;
-		} catch (error: unknown) {
-			console.error(error);
-			console.log('Retrying...');
-
-			const {data: {choices: {0: result}}} = await this.#openai.createCompletion({
-				model: 'text-davinci-003',
-				prompt: input,
-				// eslint-disable-next-line @typescript-eslint/naming-convention
-				max_tokens: 4097 - encode(input).length,
-			});
-
-			const text = result.text?.trim();
-
-			if (result.finish_reason !== 'stop') {
-				throw new Error(`Error finish_reason is ${result.finish_reason!}`);
-			}
-
-			if (!text) {
-				throw new Error('Error generated empty text');
-			}
-
-			return text;
+		if (result.finish_reason !== 'stop') {
+			throw new Error(`Error finish_reason is ${result.finish_reason!}`);
 		}
+
+		if (!text) {
+			throw new Error('Error generated empty text');
+		}
+
+		return text;
 	}
 
 	async #generateThumbnail(input: string) {
