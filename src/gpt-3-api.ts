@@ -102,7 +102,7 @@ class Gpt3ApI {
 		Lastly, write your erotica with the intention of captivating readers and ensuring that it endures the test of time, leaving a lasting impression on your readers.`,
 		);
 
-		const features = await this.#generateText(`Give a concise and SFW (Safe For Work) description of The Physical Features Of The People Involved In The Following Love Story ${suffix}. Add or fix missing or vague attributes appropriately to get a clear picture:\n\n\n${body}`);
+		const features = await this.#generateText(`Give a clear and concise description of The Physical Features Of The People Involved In The Following Love Story ${suffix}. Generated text should be G-rated (Safe for work):\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
 		const titleRaw = await this.#generateText(`Generate The Title For The Following Erotica ${suffix}:\n\n\n${body}`);
 
