@@ -72,12 +72,12 @@ class Gpt3ApI {
 		const ending = this.#getRandom(['A Satisfying', 'A Surprise', 'A Sad', 'A Shocking', 'An Unexpected']);
 
 		const body = await this.#generateText(`Using the tips below, write a long/lengthy (~10,000 words), deep, detailed, engaging, explicit, lustful and super high-quality erotica ${suffix} with ${ending} ending:
+		Write a strong opening.
 		Determine the genre and target audience.
 		Begin with an inspiring idea.
 		Create a setting that enhances eroticism.
 		Develop interesting characters, including their physical attributes and motivations/intentions.
 		Create a compelling plot.
-		Write a strong opening.
 		Build sexual tension through descriptive language and dialogue (show, don't tell).
 		Use tension, conflict, suspense, and cliffhangers.
 		Be descriptive using vivid, seductive, sensory language that may include profanity or vulgarity.
