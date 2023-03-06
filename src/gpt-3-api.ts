@@ -92,18 +92,10 @@ class Gpt3ApI {
 		const adjective = this.#getRandom(this.#adjectives);
 		const suffix = category ? `About ${adjective} ${category} Couple` : `About ${adjective} Couple`;
 		const ending = this.#getRandom(['A Satisfying', 'A Surprise', 'A Sad', 'A Shocking', 'An Unexpected']);
-
-		const body = await this.#generateText(
-			`Write a 10,000-word erotic story ${suffix} with a captivating opening, detailed descriptions, and ${ending} ending.
-			Build sexual tension through descriptive language and dialogue using a "show, don't tell" approach.
-			Develop unique characters with interesting physical attributes, motivations, and intentions, and create a compelling plot with tension, conflict, suspense, and cliffhangers.
-			Experiment with taboos such as BDSM, horror, transgressive, incest, and heartbreak.
-			Write with the intention of leaving a lasting impression on the reader.`,
-		);
-
-		const features = await this.#generateText(`Provide a G-rated description of the physical appearance of the individuals in the following erotic story ${suffix}. Your description should be clear and concise. Include only physical features. The story is as follows:\n\n\n${body}`);
-		const imgData = await this.#generateThumbnail(`Generate a high-resolution (Ultra HD) 4K image to depict a love story ${suffix}:\n\n\n${features}`);
-		const titleRaw = await this.#generateText(`Give a Title to the Following Erotic Story ${suffix}:\n\n\n${body}`);
+		const body = await this.#generateText(`Write a 10,000-word erotic story ${suffix} with a captivating opening, detailed descriptions, and ${ending} ending. Build sexual tension through descriptive language and dialogue using a "show, don't tell" approach. Develop unique characters with interesting physical attributes, motivations, and intentions, and create a compelling plot with tension, conflict, suspense, and cliffhangers. Experiment with taboos such as BDSM, horror, transgressive, incest, and heartbreak. Write with the intention of leaving a lasting impression on the reader.`);
+		const features = await this.#generateText(`Provide a G-rated description of the physical appearance of the individuals in the following erotic story ${suffix}. Your description should be clear and concise. Include only physical features. The story is as follows:\n${body}`);
+		const imgData = await this.#generateThumbnail(`Generate a high-resolution (Ultra HD) 4K image to depict a love story ${suffix}:\n${features}`);
+		const titleRaw = await this.#generateText(`Give a Title to the Following Erotic Story ${suffix}:\n${body}`);
 
 		let title: string;
 
