@@ -94,17 +94,16 @@ class Gpt3ApI {
 		const ending = this.#getRandom(['A Satisfying', 'A Surprise', 'A Sad', 'A Shocking', 'An Unexpected']);
 
 		const body = await this.#generateText(
-			`Using the tips provided below, write a long, deep, explicit, lustful and engaging erotica of super high-quality with a length of approximately 10,000 words, detailed descriptions, and ${ending} ending. Your erotica should focus on ${suffix}. Do not add a title.\n\n
-		To start, write a captivating opening that immediately hooks the reader. Next, determine the genre and target audience of your erotica. From there, develop an inspiring idea that will capture the reader's attention and maintain their interest throughout the erotica.
-		To enhance the eroticism, create a setting that is conducive to sexual tension and desire. Develop interesting characters with unique physical attributes, motivations, and intentions. Additionally, create a compelling plot with tension, conflict, suspense, and cliffhangers.
-		As you write, build sexual tension through descriptive language and dialogue, using a "show, don't tell" approach. Use informal, vivid, seductive, and sensory language that may include profanity or vulgarity. Ensure a smooth flow, fully developed characters, and appropriate pacing that keeps the erotica moving forward.
-		Experiment and push boundaries by exploring taboos, including consensual and non-consensual themes such as BDSM, Wholesome, Lovely, Domination, Submission, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity, infidelity, cheating, and heartbreak.
-		Lastly, write your erotica with the intention of captivating readers and ensuring that it endures the test of time, leaving a lasting impression on your readers.`,
+			`Write a 10,000-word erotic story ${suffix} with a captivating opening, detailed descriptions, and ${ending} ending.
+			Build sexual tension through descriptive language and dialogue using a "show, don't tell" approach.
+			Develop unique characters with interesting physical attributes, motivations, and intentions, and create a compelling plot with tension, conflict, suspense, and cliffhangers.
+			Experiment with taboos such as BDSM, horror, transgressive, incest, and heartbreak.
+			Write with the intention of leaving a lasting impression on the reader.`,
 		);
 
-		const features = await this.#generateText(`Give a clear and concise description of The Physical Features Of The People Involved In The Following Love Story ${suffix}. Generated text should be G-rated (Safe for work):\n\n\n${body}`);
-		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
-		const titleRaw = await this.#generateText(`Generate The Title For The Following Erotica ${suffix}:\n\n\n${body}`);
+		const features = await this.#generateText(`Provide a G-rated description of the physical appearance of the individuals in the following erotic story ${suffix}. Your description should be clear and concise. Include only physical features. The story is as follows:\n\n\n${body}`);
+		const imgData = await this.#generateThumbnail(`Generate a high-resolution (Ultra HD) 4K image to depict a love story ${suffix}:\n\n\n${features}`);
+		const titleRaw = await this.#generateText(`Give a Title to the Following Erotic Story ${suffix}:\n\n\n${body}`);
 
 		let title: string;
 
