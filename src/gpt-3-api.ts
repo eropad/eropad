@@ -44,7 +44,7 @@ class Gpt3ApI {
 			const text = result.message?.content.trim();
 
 			if (result.finish_reason !== 'stop') {
-				throw new Error(`Error finish_reason is ${result.finish_reason!}`);
+				throw new Error(`Error finish_reason is ${result.finish_reason!} and text is ${result.message!.content}`);
 			}
 
 			if (!text) {
@@ -79,7 +79,7 @@ class Gpt3ApI {
 
 	async #generateThumbnail(input: string) {
 		const {data: {data: {0: result}}} = await this.#openai.createImage({
-			prompt: input,
+			prompt: input.toLowerCase().trim(),
 			// eslint-disable-next-line @typescript-eslint/naming-convention
 			response_format: 'b64_json',
 		});
@@ -102,14 +102,14 @@ class Gpt3ApI {
 		Lastly, write your erotica with the intention of captivating readers and ensuring that it endures the test of time, leaving a lasting impression on your readers.`,
 		);
 
-		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
+		const features = await this.#generateText(`Give a concise and SFW (Safe For Work) description of The Physical Features Of The People Involved In The Following Love Story ${suffix}. Add or fix missing or vague attributes appropriately to get a clear picture:\n\n\n${body}`);
 		const imgData = await this.#generateThumbnail(`Generate An Ultra HD 4K Featured Image For A Love Story ${suffix} Involving:\n\n\n${features}.`);
 		const titleRaw = await this.#generateText(`Generate The Title For The Following Erotica ${suffix}:\n\n\n${body}`);
 
 		let title: string;
 
-		if (titleRaw.startsWith('Title: ')) {
-			title = titleRaw.split('Title: ')[1];
+		if (titleRaw.startsWith('Title: ') || titleRaw.startsWith('title: ')) {
+			title = titleRaw.split('Title: ')[1] || titleRaw.split('title: ')[1];
 		} else {
 			const titleRawSplit = titleRaw.split('"');
 
