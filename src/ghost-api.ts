@@ -143,7 +143,7 @@ class GhostApi {
 
 		if (defaultNewsletter) {
 			defaultNewsletter.name = straightCategory;
-			defaultNewsletter.slug = straightCategory;
+			defaultNewsletter.slug = straightCategory.toLowerCase();
 		}
 
 		const nlMap = Array.from(new Set(categories)).map(category => {
