@@ -80,9 +80,9 @@ class Gpt3ApI {
 		Create a compelling plot.
 		Build sexual tension through descriptive language and dialogue (show, don't tell).
 		Use tension, conflict, suspense, and cliffhangers.
-		Be descriptive using vivid, seductive, sensory language that may include profanity or vulgarity.
+		Be descriptive using informal, vivid, seductive, sensory language that may include profanity or vulgarity.
 		Ensure smooth flow, fully developed characters, and appropriate pacing that keeps the erotica moving forward.
-		Experiment and push boundaries by exploring taboos and consensual/non-consensual themes such as BDSM, Wholesome, Lovely, Domination, Submission, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity, infidelity/cheating, and heartbreak.
+		Experiment and push boundaries by exploring taboos, consensual and non-consensual themes such as BDSM, Wholesome, Lovely, Domination, Submission, Horror, Transgressive, Interracial, Hentai, Fantasy, Paranormal, Incest, Polygamy, Orgy, Celebrity, infidelity/cheating, and heartbreak.
 		Write with the intention of captivating readers and ensuring that the erotica endures the test of time and always comes out on top.`);
 
 		const features = await this.#generateText(`Describe The Physical Features Of The People Involved In The Following Love Story ${suffix}:\n\n\n${body}`);
